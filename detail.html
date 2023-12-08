@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-[75%]">
+        <div id="title"class="text-2xl font-bold text-center"></div>
+        <script>
+        $("document").ready(() => {
+            $.get(
+            "https://844deb07bd27403da728d3d434ab3268.api.mockbin.io/",
+            (data, textStatus, xhr) => {
+                console.log({data});
+                if (xhr.status === 200) {
+                showData(data);
+                }
+            }
+            );
+            function showData(obj) {
+                const title = document.getElementById("title")
+                title.innerText= obj.title
+            }
+        });
+        </script>
+        <div class="flex justify-center">
+        <img class="object-center" src="https://images.viblo.asia/e6de922a-b90d-48b5-a38e-ad43a33cf833.png" alt="contribute-event">
+        </div>
+    </div>
+      </main>
+</body>
+</html>

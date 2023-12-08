@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>announcements</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <menu class=" flex justify-between">
+        <div class="flex mx-52 space-x-5">
+            <img class="w-20 h-20" src="https://viblo.asia/logo_full.svg" alt="viblo-web-logo">
+            <ul class="flex text-lg font-medium text-stone-600 space-x-3 mt-5">
+                <li>Bài Viết</li>
+                <li>Hỏi Đáp</li>
+                <li>Thảo Luận</li>
+            </ul>
+        </div>
+        <div class="flex space-x-5 space-y-2">
+            <div class="flex">   
+                <input type="text" placeholder="Tìm kiếm trên Viblo" class="block rounded-l-md w-30 h-10 border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-cyan-700"></input>
+                <button type="button" class=" w-30 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-r-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-7700">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="text-stone-500"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></div>
+            <div class="text-stone-500"><a href="#"><i class="fa fa-globe" aria-hidden="true"></i></a></div>
+        </div>
+    </menu>
+    <img src="https://images.viblo.asia/full/39776c26-3511-4f2f-adb4-57cbbe97bc75.png" alt="hackathon">
+
+    <main class=" mx-52">
+        <div id="list" class="w-75% space-y-3"></div>
+        <script>
+          $("document").ready(() => {
+            $.get(
+              "https://8c22c204b3474980b549d26caf5ab0eb.api.mockbin.io/",
+              (data, textStatus, xhr) => {
+                if (xhr.status === 200) {
+                  showData(data);
+                }
+              }
+            );
+            function showData(arr) {
+              const list = document.getElementById("list");
+              const template = `<div class="flex">  
+                <div>  
+                    <img class="h-10 w-10" src="https://images.viblo.asia/avatar-retina/d3fbbb69-55f2-4530-99de-de866b71e9d8.png" alt = "viblo-logo"/>  
+                </div>  
+                <div class="w-1/2 flex flex-col"> 
+                    <a href="#" class="text-cyan-700 hover:underline">Viblo Annoucer</a> 
+                    <div>$published_at</div>
+                    <div class="text-lg">$title</div>
+                    <div class="border-box rounded w-28 text-center text-white bg-cyan-700 hover:bg-cyan-900"><a href="#">$system</a></div>
+                    <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-400">
+                </div></div>`
+              arr.forEach((element) => {
+                let newElement =
+                  template.replace("$published_at", element.published_at)
+                  .replace("$title", element.title)
+                  .replace("$system", element.system)
+                const div = document.createElement("div");
+                div.innerHTML = newElement;
+                list.appendChild(div);
+              });
+            }
+          });
+        </script>
+      </main>
+</body>
+</html>
